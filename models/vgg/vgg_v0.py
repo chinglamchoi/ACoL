@@ -66,9 +66,9 @@ class VGG(nn.Module):
 
     def get_loss(self, logits, gt_labels):
         if self.onehot == 'True':
-            gt = gt_labels.float()
+            gt = float(gt_labels)
         else:
-            gt = gt_labels.long()
+            gt = gt_labels
         loss_cls = self.loss_cross_entropy(logits[0], gt)
 
 
@@ -103,7 +103,7 @@ class VGG(nn.Module):
         return atten_normed
 
     def get_atten_map(self, feature_maps, gt_labels, normalize=True):
-        label = gt_labels.long()
+        label = gt_labels
 
         feature_map_size = feature_maps.size()
         batch_size = feature_map_size[0]
