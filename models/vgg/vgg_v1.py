@@ -30,7 +30,7 @@ model_urls = {
 class VGG(nn.Module):
 
     def __init__(self, features, num_classes=1000, args=None, threshold=0.6):
-        super(VGG, self).__init__()
+        super().__init__()
         self.features = features
         self.cls = self.classifier(512, num_classes)
         self.cls_erase = self.classifier(512, num_classes)
@@ -93,7 +93,7 @@ class VGG(nn.Module):
         if self.onehot == 'True':
             gt = gt_labels.float()
         else:
-            gt = gt_labels.long()
+            gt = gt_labels
         loss_cls = self.loss_cross_entropy(logits[0], gt)
         loss_cls_ers = self.loss_cross_entropy(logits[1], gt)
 
@@ -176,7 +176,7 @@ class VGG(nn.Module):
                 cv2.imwrite(save_path, img_dat)
 
     def get_atten_map(self, feature_maps, gt_labels, normalize=True):
-        label = gt_labels.long()
+        label = gt_labels
 
         feature_map_size = feature_maps.size()
         batch_size = feature_map_size[0]
