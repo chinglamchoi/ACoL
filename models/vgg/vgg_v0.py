@@ -30,7 +30,7 @@ model_urls = {
 class VGG(nn.Module):
 
     def __init__(self, features, num_classes=1000, args=None, threshold=None):
-        super(VGG, self).__init__()
+        super().__init__()
         self.features = features
         self.cls = self.classifier(512, num_classes)
         self._initialize_weights()
